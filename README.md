@@ -14,5 +14,3 @@ or
 ```
 yarn install
 ```
-
-##*** Enjoy coding ***

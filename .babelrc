@@ -1,0 +1,20 @@
+{
+  "presets": [
+    [
+      "@babel/env",
+      {
+        "targets": {
+          "browsers": [
+            "last 2 versions",
+            "safari >= 9",
+            "ie >= 11",
+            "> 1%"
+          ]
+        },
+        "useBuiltIns": "usage",
+        "modules": false,
+        "corejs": 3
+      }
+    ]
+  ]
+}

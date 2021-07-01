@@ -1,13 +1,12 @@
 import { combineReducers, Reducer } from 'redux'
-import empty from '@store/reducers/empty-reducers'
+import emptyState, { EmptyState } from '@store/reducers/empty-reducers'
 
-// export interface RootState {
-// }
-
-export type RootState = any
+export interface RootState {
+  emptyState: EmptyState
+}
 
 const rootReducer: Reducer<RootState> = combineReducers({
-  empty,
+  emptyState,
 })
 
 export default rootReducer

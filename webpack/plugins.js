@@ -4,10 +4,14 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const ESLintPlugin = require('eslint-webpack-plugin')
 
 const plugins = [
   new webpack.ProvidePlugin({
     React: 'react',
+  }),
+  new ESLintPlugin({
+    extensions: ['ts', 'tsx', 'js'],
   }),
   new HtmlWebpackPlugin({
     template: 'src/index.html'

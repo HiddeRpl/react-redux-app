@@ -21,7 +21,7 @@ export default class StartupView extends React.Component<Props, State> {
     this.initializeData()
   }
 
-  public render() {
+  public render(): React.ReactNode {
     return this.state.loading ? null : this.props.children
   }
 

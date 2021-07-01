@@ -15,7 +15,7 @@ import StatusAlert from 'react-status-alert'
 import StartupView from './startup'
 import HomeView from '@modules/home/home'
 
-class App extends React.Component<RouteComponentProps<any>, {}> {
+class App extends React.Component<RouteComponentProps<{}>, {}> {
   private readonly routeListen
 
   constructor(props) {
@@ -32,7 +32,7 @@ class App extends React.Component<RouteComponentProps<any>, {}> {
     }
   }
 
-  public render() {
+  public render(): React.ReactNode {
     return this.props.children
   }
 
@@ -44,7 +44,7 @@ class App extends React.Component<RouteComponentProps<any>, {}> {
 const AppContainer = withRouter(App)
 
 export default class AppView extends React.Component<{}, {}> {
-  public render() {
+  public render(): React.ReactNode {
     return (
       <Provider store={store}>
         <StartupView>

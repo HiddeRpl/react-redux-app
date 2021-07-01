@@ -1,6 +1,5 @@
 const path = require('path')
 const config = require('./webpack/config.js')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const distDir = './build'
 
@@ -35,14 +34,10 @@ module.exports = {
     rules: config.rules,
   },
   plugins: config.plugins,
-  node: {
-    console: true,
-    fs: 'empty',
-    net: 'empty',
-    tls: 'empty',
-  },
   optimization: {
     splitChunks: {
+      chunks: 'all',
+      minSize: 0,
       cacheGroups: {
         vendor: {
           test: /node_modules/,
@@ -52,12 +47,5 @@ module.exports = {
         },
       },
     },
-    minimizer: [
-      new UglifyJsPlugin({
-        // cache: true,
-        // parallel: true,
-        // sourceMap: true,
-      }),
-    ],
   },
 }

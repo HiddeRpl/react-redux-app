@@ -1,0 +1,103 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint",
+    "react"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:prettier/recommended",
+    "prettier/@typescript-eslint",
+    "prettier/react"
+  ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "rules": {
+    "no-async-promise-executor": "off",
+    "max-classes-per-file": ["error", 10],
+    "quotes": ["error", "single", {"avoidEscape":  true}],
+    "semi": ["error", "never"],
+    "no-var": "error",
+    "max-len": ["error", {
+      "code": 120,
+      "tabWidth": 2,
+      "ignoreComments": true,
+      "ignoreTrailingComments": true,
+      "ignoreUrls": true,
+      "ignoreTemplateLiterals": true,
+      "ignoreRegExpLiterals": true,
+      "ignoreStrings": true
+    }],
+
+    "@typescript-eslint/no-unused-vars":["error"],
+    "@typescript-eslint/explicit-module-boundary-types": "error",
+    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        "selector": "interface",
+        "format": ["PascalCase"],
+        "custom": {
+          "regex": "^I[A-Z]",
+          "match": false
+        }
+      }
+    ],
+    "@typescript-eslint/ban-types": [
+      "error",
+      {
+        "types": {
+          "{}": false
+        }
+      }
+    ],
+
+    "react/jsx-no-target-blank": "off",
+    "react/display-name": "off",
+    "react/no-unsafe": "warn",
+    "react/no-deprecated": "warn",
+    "react/no-direct-mutation-state": "error",
+    "react/no-unused-state": "error",
+    "react/prefer-es6-class": "error",
+    "react/self-closing-comp": "error",
+    "react/jsx-fragments": "error",
+    "react/jsx-no-useless-fragment": "error",
+    "react/jsx-no-bind": "error",
+    "react/jsx-pascal-case": "error",
+    "react/no-unescaped-entities": "off",
+    "react/prop-types": "off",
+    "react/no-did-mount-set-state": "off",
+    "react/prefer-stateless-function": "off",
+    "react/no-danger": "off",
+
+    "react-hooks/exhaustive-deps": "off",
+
+    "jest/no-test-callback": "off",
+    "jest/no-commented-out-tests": "off"
+  },
+  "overrides": [
+    {
+      "files": ["*.js"],
+      "rules": {
+        "no-undef": "off",
+        "@typescript-eslint/no-var-requires": "off"
+      }
+    }
+  ],
+  "globals": {
+    "JSX": true
+  }
+}

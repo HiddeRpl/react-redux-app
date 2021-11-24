@@ -1,4 +1,4 @@
-const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const rules = [
   {
@@ -8,20 +8,11 @@ const rules = [
   },
   {
     test: /\.css/,
-    use: [
-      MiniCssExtractPlugin.loader,
-      'css-loader',
-      'postcss-loader',
-    ],
+    use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
   },
   {
     test: /\.scss/,
-    use: [
-      MiniCssExtractPlugin.loader,
-      'css-loader',
-      'postcss-loader',
-      'sass-loader'
-    ],
+    use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader'],
   },
   {
     test: /\.(png|jpg|svg)$/,

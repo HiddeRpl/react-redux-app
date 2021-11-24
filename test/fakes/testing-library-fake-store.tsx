@@ -1,20 +1,18 @@
 import * as React from 'react'
 import { Provider } from 'react-redux'
-import { applyMiddleware, createStore, Store } from 'redux'
+import { applyMiddleware, createStore } from 'redux'
 import rootReducer from '@store/reducers/root-reducers'
 import thunk from 'redux-thunk'
-import { Route, Router } from 'react-router-dom'
+import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { render, RenderResult } from '@testing-library/react'
-import { createMemoryHistory } from 'history'
 import { renderHook } from '@testing-library/react-hooks'
-import { useForm, UseFormReturn } from 'react-hook-form'
+import { FormProvider, useForm, UseFormReturn } from 'react-hook-form'
 
-export const createRenderAndStore = ({
-  path = '',
-  route = '/',
-  history = createMemoryHistory({ initialEntries: [route] }),
-  defaultFormValues = {},
-} = {}): [(ui, options?) => RenderResult, Store, UseFormReturn] => {
+export const createRenderAndStore = ({ path = '', route = '/', defaultFormValues = {} } = {}): [
+  any,
+  any,
+  UseFormReturn,
+] => {
   const store = createStore(rootReducer, applyMiddleware(thunk))
   const { result } = renderHook(() => useForm({ defaultValues: defaultFormValues }))
   const methods = result.current
@@ -22,9 +20,11 @@ export const createRenderAndStore = ({
   const AppProviders = ({ children }) => {
     return (
       <Provider store={store}>
-        <Router history={history}>
-          <Route path={path}>{children}</Route>
-        </Router>
+        <MemoryRouter initialEntries={[route]}>
+          <Routes>
+            <Route path={path} element={<FormProvider {...methods}>{children}</FormProvider>} />
+          </Routes>
+        </MemoryRouter>
       </Provider>
     )
   }

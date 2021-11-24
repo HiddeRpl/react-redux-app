@@ -1,22 +1,25 @@
 const path = require('path')
 const config = require('./webpack/config.js')
 
+const TerserPlugin = require('terser-webpack-plugin')
+
 const distDir = './build'
+const mode = process.env.NODE_ENV || 'development'
 
 module.exports = {
-  mode: process.env.NODE_ENV,
+  mode,
   entry: './src/ts/index.tsx',
   devtool: 'inline-source-map',
   devServer: {
-    contentBase: path.resolve(__dirname, distDir),
+    static: path.resolve(__dirname, distDir),
     compress: true,
     open: true,
-    port: 6969
+    port: 6969,
   },
   output: {
     path: path.resolve(__dirname, distDir),
     filename: '[name].[chunkhash].js',
-    publicPath: ''
+    publicPath: '',
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
@@ -35,6 +38,12 @@ module.exports = {
   },
   plugins: config.plugins,
   optimization: {
+    ...(mode === 'production'
+      ? {
+          minimize: true,
+          minimizer: [new TerserPlugin()],
+        }
+      : {}),
     splitChunks: {
       chunks: 'all',
       minSize: 0,

@@ -3,7 +3,7 @@ const analize = false
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ESLintPlugin = require('eslint-webpack-plugin')
 
 const plugins = [
@@ -14,11 +14,11 @@ const plugins = [
     extensions: ['ts', 'tsx', 'js'],
   }),
   new HtmlWebpackPlugin({
-    template: 'src/index.html'
+    template: 'src/index.html',
   }),
   new MiniCssExtractPlugin({
-    filename: "[name].[chunkhash].css",
-    chunkFilename: "[name].[chunkhash].css"
+    filename: '[name].[chunkhash].css',
+    chunkFilename: '[name].[chunkhash].css',
   }),
 ]
 

@@ -1,35 +1,19 @@
 import { NavigationPath } from '@models/routes'
 import * as React from 'react'
-import { connect } from 'react-redux'
-import { Redirect, Route, RouteComponentProps, RouteProps } from 'react-router-dom'
-
-interface ReduxProps {
-  isAuth: boolean
-}
+import { useSelector } from 'react-redux'
+import { Navigate } from 'react-router-dom'
+import { RootState } from '@store/reducers/root-reducers'
 
 interface ComponentProps {
-  component: React.ComponentType<RouteComponentProps<{}>> | React.ComponentType<unknown>
+  component: React.ComponentType<any>
 }
 
-export type Props = ComponentProps & RouteProps & ReduxProps
+const PrivateRoute = (props: ComponentProps): JSX.Element => {
+  const isAuth = useSelector((state: RootState) => state.emptyState.isEmpty)
 
-export class PrivateRouteComponent extends React.Component<Props, {}> {
-  public render(): React.ReactNode {
-    const { component: Component, ...rest } = this.props
-    return (
-      <Route
-        {...rest}
-        // eslint-disable-next-line react/jsx-no-bind
-        render={props => (this.props.isAuth ? <Component {...props} /> : <Redirect to={NavigationPath.Unauthorized} />)}
-      />
-    )
-  }
+  const Component = props.component
+
+  return isAuth ? <Component {...props} /> : <Navigate to={NavigationPath.Unauthorized} />
 }
-
-const mapStateToProps = (): ReduxProps => ({
-  isAuth: true,
-})
-
-const PrivateRoute = connect(mapStateToProps)(PrivateRouteComponent)
 
 export default PrivateRoute

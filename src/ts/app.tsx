@@ -10,38 +10,20 @@ import UnauthorizedView from '@components/unauthorized'
 import store from '@store/index'
 import * as React from 'react'
 import { Provider } from 'react-redux'
-import { HashRouter, Redirect, Route, RouteComponentProps, Switch, withRouter } from 'react-router-dom'
+import { HashRouter, Route, Routes, useLocation } from 'react-router-dom'
 import StatusAlert from 'react-status-alert'
 import StartupView from './startup'
 import HomeView from '@modules/home/home'
 
-class App extends React.Component<RouteComponentProps<{}>, {}> {
-  private readonly routeListen
+const AppContainer = (props: React.PropsWithChildren<any>): JSX.Element => {
+  const location = useLocation()
 
-  constructor(props) {
-    super(props)
-
-    this.routeListen = this.props.history.listen(() => {
-      this.handleRouteChange()
-    })
-  }
-
-  public componentWillUnmount(): void {
-    if (this.routeListen) {
-      this.routeListen()
-    }
-  }
-
-  public render(): React.ReactNode {
-    return this.props.children
-  }
-
-  public handleRouteChange = (): void => {
+  React.useEffect(() => {
     window.scrollTo(0, 0)
-  }
-}
+  }, [location.pathname])
 
-const AppContainer = withRouter(App)
+  return props.children
+}
 
 export default class AppView extends React.Component<{}, {}> {
   public render(): React.ReactNode {
@@ -51,11 +33,11 @@ export default class AppView extends React.Component<{}, {}> {
           <HashRouter basename="/">
             <AppContainer>
               <StatusAlert />
-              <Switch>
-                <PrivateRoute exact={true} path={NavigationPath.Home} component={HomeView} />
-                <Route path={NavigationPath.Unauthorized} component={UnauthorizedView} />
-                <Redirect from="*" to={NavigationPath.Home} />
-              </Switch>
+              <Routes>
+                <Route path={NavigationPath.Home} element={<PrivateRoute component={HomeView} />} />
+                <Route path={NavigationPath.Unauthorized} element={<UnauthorizedView />} />
+                <Route path="*" element={<HomeView />} />
+              </Routes>
             </AppContainer>
           </HashRouter>
         </StartupView>

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import * as ReactDOM from 'react-dom'
+import * as ReactDOM from 'react-dom/client'
 import AppView from '@app'
 
-ReactDOM.render(<AppView />, document.getElementById('react-redux-app'))
+ReactDOM.createRoot(document.getElementById('react-redux-app') as HTMLElement).render(<AppView />)
